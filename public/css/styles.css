@@ -1,0 +1,634 @@
+#body-nav {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+#body-home {
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f5f5;
+}
+#body-footer {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#body-login {
+    background: #000;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ------------------- FOOTER ------------------- */
+@media (max-width: 768px) {
+    .footer-crunchyroll {
+        padding: 30px 0 20px;
+    }
+
+    .footer-column {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .social-icons {
+        margin-bottom: 20px;
+        justify-content: flex-start;
+    }
+}
+
+/* ----------- BRAND LOGO / HOME ---------------- */
+@media (max-width: 768px) {
+    .brand-logo img {
+        width: 100%;
+        max-width: 200px; /* opcional, para que no estiren demasiado */
+        height: 180px;
+        object-fit: cover;
+    }
+}
+@media (max-width: 576px) {
+    .brand-logo img {
+        height: 160px;
+    }
+}
+
+
+/* NAVBAR */
+/* NAVBAR */
+.banner-superior {
+    background-color: #000000;
+    color: white;
+    padding: 10px 0;
+    font-size: 13px;
+}
+.banner-superior-contenido{
+    display: flex;
+    justify-content: space-between;
+}
+.banner-superior a {
+    color:#FF640B;
+    text-decoration: none;
+    font-weight: 600;
+}
+.navbar-custom {
+    background-color:#000000;
+    padding: 15px 0;
+    position: relative;
+}
+.navbar-custom2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-logo {
+    height: 35px;
+    width: 200px;
+    max-width: 200px;
+}
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+.search-wrapper {
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 30px;
+    margin-left: 150px;
+}
+.search-input {
+    border: none;
+    border-radius: 4px 0 0 4px;
+    padding: 10px 15px;
+    font-size: 14px;
+    width: 100%;
+}
+.search-btn {
+    background-color:#FF640B;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.nav-icons {
+    display: flex;
+    gap: 120px;
+    align-items: center;
+}
+.nav-icon {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+    text-decoration: none;
+}
+.nav-icon:hover {
+    color:#FF640B;
+}
+.bottom-nav {
+    background-color:#141519;
+    border-top: 1px solid #2a2a2a;
+}
+.bottom-nav .nav-link {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 25px;
+    transition: color 0.3s;
+}
+.bottom-nav .nav-link:hover {
+    color:#FF640B;
+}
+
+/* ========== MENÚ DESPLEGABLE MOBILE ========== */
+.mobile-menu {
+    display: none;
+    background-color: #1a1a1a;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 998;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.mobile-menu.active {
+    display: block;
+}
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.mobile-menu li {
+    border-bottom: 1px solid #333;
+}
+.mobile-menu a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s;
+}
+.mobile-menu a:hover {
+    background-color: #FF640B;
+}
+
+/* ========== RESPONSIVE MOBILE ========== */
+@media (max-width: 768px) {
+    /* Ocultar top banner en mobile */
+    .top-banner {
+        display: none;
+    }
+
+    /* Navbar principal */
+    .navbar-custom {
+        padding: 12px 0;
+    }
+
+    .navbar-custom2 {
+        flex-wrap: wrap;
+        gap: 0;
+        align-items: center;
+    }
+
+    /* Mostrar menú hamburguesa a la IZQUIERDA */
+    .menu-toggle {
+        display: block;
+        order: 1;
+        flex: 0 0 auto;
+    }
+
+    /* Logo CENTRADO */
+    .navbar-brand {
+        order: 2;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .navbar-logo {
+        height: 30px;
+        width: auto;
+        max-width: 150px;
+    }
+
+    /* Solo mostrar icono de CARRITO a la derecha */
+    .nav-icons {
+        order: 3;
+        flex: 0 0 auto;
+        gap: 0;
+    }
+
+    /* Ocultar icono de usuario (primer icono) */
+    .nav-icons .nav-icon:first-child {
+        display: none;
+    }
+
+    .nav-icon {
+        font-size: 20px;
+    }
+
+    /* Buscador en NUEVA LÍNEA debajo */
+    .search-wrapper {
+        order: 4;
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+        margin: 12px 0 0 0;
+        padding: 0;
+    }
+
+    .search-input {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+
+    .search-btn {
+        padding: 12px 20px;
+    }
+
+    /* Ocultar bottom nav en mobile */
+    .bottom-nav {
+        display: none;
+    }
+}
+
+/* Footer */
+.footer-crunchyroll {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 50px 0 30px;
+}
+.footer-title {
+    color: #ff6b35;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-links li {
+    margin-bottom: 12px;
+}
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: #ff6b35;
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #1a1a1a;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 1.2rem;
+}
+.social-icon:hover {
+    background-color: #ff6b35;
+    color: #ffffff;
+}
+
+
+
+
+
+
+/* Home */
+.hero-section img {
+    width: 100%;   /* Se ajusta al ancho del contenedor */
+    height: auto;  /* Mantiene la proporción */
+    display: block; /* Evita espacio abajo de la imagen */
+}
+.cabecera-products-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.cabecera-products-section h2{
+    font-weight: bolder;
+}
+.cabecera-products-section a{
+    text-decoration: none;
+    color: #000000;
+}
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+    height: 350px; /* altura uniforme de todas las cards */
+}
+.product-image {
+    width: 100%;
+    max-height: 180px;  /* no demasiado alta */
+    object-fit: contain;  /* mantiene proporción y recorta si hace falta */
+    display: block;
+}
+.product-info {
+    padding: 15px;
+    color: #000000;
+    flex-grow: 1;           /* ocupa el espacio restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.product-info h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.2em;      /* altura de línea */
+    max-height: 2.4em;       /* 2 líneas x line-height */
+    overflow: hidden;        /* oculta el exceso */
+    text-overflow: ellipsis; /* muestra … al final */
+}
+.product-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FF640B;
+    margin-bottom: 10px;
+}
+.btn-add-cart {
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-add-cart:hover {
+    background-color: #FF640B;
+}
+.promo-card {
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+    margin-bottom: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.promo-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.brands-section {
+    margin-top: 100px;
+}
+.brands-section h3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.brand-logo {
+    overflow: hidden;
+    padding: 0;
+    height: 100%;
+}
+.brand-logo img {
+    width: 100%;
+    height: 200px;       /* ← AJUSTA AQUÍ SI QUIERES CAMBIAR ALTURA */
+    object-fit: contain;   /* Se recortan sin deformarse */
+    display: block;
+}
+.anime-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.anime-img img {
+    width: 100%;
+    height: 400px;     /* ← IMPORTANTE */
+    object-fit: cover; /* ← RECORTA SIN DEFORMAR */
+    display: block;
+}
+.anime-body {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+    flex-grow: 1;
+}
+.anime-title {
+    margin-top: 15px;
+    font-size: 30px;
+    line-height: 1.2rem;
+    height: 28px;
+    overflow: hidden;
+}
+.anime-desc {
+    font-size: 0.85rem;
+    line-height: 1.1rem;
+    height: 2.2rem;
+    overflow: hidden;
+    opacity: 0.8;
+}
+.two-card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* margen entre tarjetas, similar a la sección de 3 tarjetas */
+    justify-content: center; /* centrado horizontal si hay espacio extra */
+}
+.two-card-col {
+    flex: 1 1 calc(50% - 20px); /* ancho 50% menos la mitad del gap */
+    max-width: 480px;           /* opcional: limitar el ancho máximo */
+}
+.two-card {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.two-card-image img {
+    width: 100%;
+    height: 300px; /* reducido respecto a las 3 tarjetas */
+    object-fit: cover;
+    display: block;
+}
+.two-card-content {
+    background: #000;
+    color: #fff;
+    padding: 15px;
+    flex-grow: 1;
+}
+.two-card-title {
+    margin-top: 15px;
+    font-size: 30px;
+    line-height: 1.2rem;
+    height: 28px;
+    overflow: hidden;
+}
+.two-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.1rem;
+    height: 2.2rem;
+    overflow: hidden;
+    opacity: 0.8;
+}
+.features-section {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+.features-section h2 {
+    font-weight: bolder;
+    font-size: 48px;
+}
+.feature-box {
+    text-align: center;
+    padding: 20px;
+}
+.feature-box h5{
+    font-weight: bolder;
+}
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-top: -200px;
+}
+
+.login-card {
+    width: 420px;
+    text-align: center;
+}
+
+/* ------------------ LOGO ------------------ */
+.logo{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+.logo img {
+    width: 220px;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-weight: 300;
+    margin-bottom: 45px;
+    font-size: 28px;
+}
+
+/* ------------------ INPUTS ------------------ */
+.form-group {
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.form-control {
+    background: transparent !important;
+    border: none;
+    border-bottom: 2px solid #444;
+    border-radius: 0;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 16px;
+    outline: none;
+}
+
+.form-control:focus {
+    border-bottom-color: #ff6b35;
+    box-shadow: none;
+}
+
+.form-label {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: #aaa;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.form-control:focus + .form-label,
+.form-control:not(:placeholder-shown) + .form-label {
+    top: -18px;
+    font-size: 13px;
+    color: #ff6b35;
+}
+
+/* ------------------ BOTÓN ------------------ */
+.btn-login {
+    width: 100%;
+    border: 2px solid #fff;
+    background: transparent;
+    color: #fff;
+    padding: 12px;
+    border-radius: 40px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    color: #FF640B;
+    border: 2px solid #FF640B;
+}
+
+/* ------------------ ENLACE REGISTER ------------------ */
+.register-link {
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: #ff6b35;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
