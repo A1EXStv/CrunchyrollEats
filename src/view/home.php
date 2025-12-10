@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenManga - Tu destino definitivo para comprar fideos anime</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/CrunchyEats_AlexRomeroLozano/public/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="public/js/script.js"></script>
-</head>
-<body id="body-home">
-    <?php session_start(); ?>
-    <?php include __DIR__ . '/nav.php'; ?>
 
     <section class="hero-section">
         <img src="/CrunchyEats_AlexRomeroLozano/public/img/primera_imagen_home.png" alt="Imagen publicidad">
@@ -205,9 +190,3 @@ foreach ($chunks as $index => $slide) {
             </div>
         </div>
     </section>
-
-    <?php include __DIR__ . '/footer.php'; ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
