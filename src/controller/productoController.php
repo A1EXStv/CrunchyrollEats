@@ -5,7 +5,7 @@ class ProductoController {
     public function index() {
         $productoDAO = new ProductoDAO();
         $productos = $productoDAO->obtenerTodos(); 
-        include 'views/home.php';
+        include 'view/home.php';
     }
 }
 ?>

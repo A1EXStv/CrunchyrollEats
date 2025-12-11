@@ -5,7 +5,7 @@ class serieDAO {
     private $conn;
 
     public function __construct() {
-        $this->conn = DBConnection::connect(); // Usas tu clase DBConnection
+        $this->conn = DBConnection::connect();
     }
 
     public function obtenerTodos() {

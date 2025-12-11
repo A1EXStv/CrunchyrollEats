@@ -46,12 +46,16 @@
 
                 <!-- Icons -->
                 <div class="nav-icons ms-auto">
-                    <a href="<?php echo isset($_SESSION['usuario']) ? 'index.php?controller=Usuario&action=perfil' : 'index.php?controller=Auth&action=login'; ?>"  class="nav-icon" title="Mi cuenta">
+                    <a href="<?php echo isset($_SESSION['usuario']) ? 'index.php?controller=Usuario&action=perfil' : 'index.php?controller=login&action=Auth'; ?>"  class="nav-icon" title="Mi cuenta">
                         <i class="fas fa-user"></i>
                     </a>
-                    <a href="<?php echo isset($_SESSION['usuario']) ? 'index.php?controller=Carrito&action=ver' : 'index.php?controller=Auth&action=login'; ?>"  class="nav-icon" title="Carrito">
+                    <a href="<?php echo isset($_SESSION['usuario']) ? 'index.php?controller=Carrito&action=ver' : 'index.php?controller=login&action=Auth'; ?>"  class="nav-icon" title="Carrito">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=login&action=logout">Cerrar sesión</a>
+                    </li>
                 </div>
             </div>
         </div>
