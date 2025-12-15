@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../model/Usuario.php';
+require_once 'C:\xampp\htdocs\CrunchyrollEats\config\db.php';
+require_once 'C:\xampp\htdocs\CrunchyrollEats\src\model\Usuario.php';
 
 class UsuarioDAO {
     private $conn;
@@ -44,6 +44,26 @@ class UsuarioDAO {
 
         $sql = "INSERT INTO usuarios (nombre, email, telefono, contraseña, rol)
                 VALUES ('$nombre', '$email', '$telefono', '$contraseña', '$rol')";
+        return $this->conn->query($sql);
+    }
+
+    public function actualizar($id, $datos) {
+        $id = intval($id);
+        $updates = [];
+        
+        if (isset($datos['rol'])) {
+            $rol = $this->conn->real_escape_string($datos['rol']);
+            $updates[] = "rol = '$rol'";
+        }
+        if (isset($datos['telefono'])) {
+            $telefono = $this->conn->real_escape_string($datos['telefono']);
+            $updates[] = "telefono = '$telefono'";
+        }
+        // Add more fields if needed
+
+        if (empty($updates)) return true; // Nothing to update
+
+        $sql = "UPDATE usuarios SET " . implode(', ', $updates) . " WHERE id_usuario = $id";
         return $this->conn->query($sql);
     }
 
