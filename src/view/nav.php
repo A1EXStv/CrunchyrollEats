@@ -53,6 +53,11 @@
                         <i class="fas fa-shopping-cart"></i>
                     </a>
 
+                    <?php if (isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'admin'): ?>
+                        <a href="public/admin/index.html" class="nav-icon" title="Panel Admin">
+                            <i class="fas fa-cogs"></i>
+                        </a>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=login&action=logout">Cerrar sesión</a>
                     </li>

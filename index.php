@@ -1,7 +1,12 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once __DIR__ . '/src/controller/homeController.php';
 include_once __DIR__ . '/src/controller/loginController.php';
 include_once __DIR__ . '/src/controller/registroController.php';
+include_once __DIR__ . '/src/controller/apiController.php';
 
 if (isset($_GET['controller'])) {
     $nombre_controller = $_GET['controller']. 'Controller';
