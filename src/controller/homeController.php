@@ -1,16 +1,17 @@
 <?php
-require_once "src/model/Producto.php";
-require_once "src/model/Serie.php";
-require_once "src/controller/loginController.php";
+require_once "src/DAO/ProductoDAO.php";
+require_once "src/DAO/SerieDAO.php";
+require_once "src/controller/LoginController.php";
 
-class homeController {
+class HomeController {
     public function index() {
-        $view = 'home.php';
-        $productoModel = new Producto();
-        $productos = $productoModel->getAll();
+        $view = 'src/view/home.php';
+        
+        $productoDAO = new ProductoDAO();
+        $productos = $productoDAO->obtenerTodos();
 
-        $serieModel = new Serie();
-        $series = $serieModel->getAll();
+        $serieDAO = new SerieDAO();
+        $series = $serieDAO->obtenerTodos();
 
         require "src/view/main.php";
     }

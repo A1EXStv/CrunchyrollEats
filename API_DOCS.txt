@@ -1,0 +1,73 @@
+================================================================================
+ MANUAL DE USO - API CRUNCHYROLL EATS (PHP)
+================================================================================
+
+Esta API permite gestionar productos y usuarios mediante peticiones JSON.
+Está integrada en el sistema principal y utiliza la sesión de PHP existente para la seguridad.
+
+--------------------------------------------------------------------------------
+1. CONFIGURACIÓN Y ACCESO
+--------------------------------------------------------------------------------
+- URL Base: /CrunchyrollEats/index.php?controller=Api
+- Formato de respuesta: JSON
+- Autenticación: Automática mediante Cookies de Sesión (PHP Session).
+  Es necesario estar logueado como 'admin' en la web principal para realizar acciones de escritura.
+
+--------------------------------------------------------------------------------
+2. ENDPOINTS (Puntos de Acceso)
+--------------------------------------------------------------------------------
+
+A) VERIFICAR AUTENTICACIÓN
+   URL: ...&action=checkAuth
+   Método: GET
+   Descripción: Verifica si el usuario actual tiene sesión iniciada.
+   Respuesta: { "authenticated": true, "role": "admin" }
+
+B) OBTENER PRODUCTOS
+   URL: ...&action=getProductos
+   Método: GET
+   Descripción: Devuelve la lista completa de productos.
+   Respuesta: [ { "id_producto": 1, "nombre": "Ramen", "precio": 12.50 ... }, ... ]
+
+C) OBTENER UN PRODUCTO
+   URL: ...&action=getProducto&id={ID}
+   Método: GET
+   Descripción: Devuelve datos de un solo producto.
+
+D) GUARDAR PRODUCTO (Crear o Editar)
+   URL: ...&action=saveProducto
+   Método: POST
+   Cuerpo (JSON):
+   {
+       "id_producto": 10,       <-- Si se envía, ACTUALIZA. Si no, CREA uno nuevo.
+       "nombre": "Nuevo Plato",
+       "precio": 15.00,
+       "id_categoria": 1,
+       "descripcion": "Descripción del plato...",
+       "imagen": "url_de_imagen.jpg"
+   }
+   Requisito: Rol de Admin.
+
+E) ELIMINAR PRODUCTO
+   URL: ...&action=deleteProducto
+   Método: POST
+   Cuerpo (JSON): { "id": 10 }
+   Requisito: Rol de Admin.
+
+F) OBTENER USUARIOS
+   URL: ...&action=getUsers
+   Método: GET
+   Requisito: Rol de Admin.
+
+--------------------------------------------------------------------------------
+3. NOTAS PARA DESARROLLADORES (FRONTEND)
+--------------------------------------------------------------------------------
+- Al hacer peticiones con `fetch` desde JS, es OBLIGATORIO incluir:
+  credentials: 'include'
+  
+  Ejemplo:
+  fetch('index.php?controller=Api&action=getProductos', {
+      credentials: 'include'
+  });
+
+- Esto asegura que la API reconozca al usuario logueado en la aplicación principal.

@@ -38,7 +38,7 @@ INSERT INTO categorias (nombre, descripcion, Activa) VALUES
 
 
 
-CrunchyEats_AlexRomeroLozano/public/img/series/
+
 \n
 
 

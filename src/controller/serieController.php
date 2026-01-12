@@ -1,11 +1,11 @@
 <?php
-include_once 'DAO/ProductoDAO.php';
+require_once 'src/DAO/SerieDAO.php';
 
-class ProductoController {
+class SerieController {
     public function index() {
-        $seriesDAO = new seriesDAO();
+        $seriesDAO = new SerieDAO();
         $series = $seriesDAO->obtenerTodos(); 
-        include 'view/home.php';
+        require 'src/view/home.php';
     }
 }
 ?>

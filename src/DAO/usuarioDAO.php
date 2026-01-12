@@ -47,6 +47,38 @@ class UsuarioDAO {
         return $this->conn->query($sql);
     }
 
+    public function actualizar($id, $datos) {
+        $id = intval($id);
+        $updates = [];
+        
+        if (isset($datos['nombre'])) {
+            $nombre = $this->conn->real_escape_string($datos['nombre']);
+            $updates[] = "nombre = '$nombre'";
+        }
+        if (isset($datos['email'])) {
+            $email = $this->conn->real_escape_string($datos['email']);
+            $updates[] = "email = '$email'";
+        }
+        if (isset($datos['rol'])) {
+            $rol = $this->conn->real_escape_string($datos['rol']);
+            $updates[] = "rol = '$rol'";
+        }
+        if (isset($datos['telefono'])) {
+            $telefono = $this->conn->real_escape_string($datos['telefono']);
+            $updates[] = "telefono = '$telefono'";
+        }
+        if (isset($datos['contraseña'])) {
+            $contraseña = $this->conn->real_escape_string($datos['contraseña']);
+            $updates[] = "contraseña = '$contraseña'";
+        }
+        // Add more fields if needed
+
+        if (empty($updates)) return true; // Nothing to update
+
+        $sql = "UPDATE usuarios SET " . implode(', ', $updates) . " WHERE id_usuario = $id";
+        return $this->conn->query($sql);
+    }
+
     public function verificarLogin($email, $contraseña) {
         $usuario = $this->obtenerPorEmail($email);
         if ($usuario && password_verify($contraseña, $usuario->getContraseña())) {

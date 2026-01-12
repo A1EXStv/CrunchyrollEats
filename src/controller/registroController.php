@@ -1,9 +1,9 @@
 <?php 
 
-require_once "src/DAO/usuarioDAO.php";
+require_once "src/DAO/UsuarioDAO.php";
 require_once "src/model/Usuario.php";
 
-class registroController {
+class RegistroController {
 
     private $usuarioDAO;
 
@@ -15,7 +15,8 @@ class registroController {
     }
 
     public function index() {
-        require 'src/view/registro.php';
+        $view = 'src/view/registro.php';
+        require 'src/view/main.php';
     }
 
     public function registrar() {
@@ -28,14 +29,25 @@ class registroController {
             $rol        = $_POST['rol'] ?? 'user';
 
             if (empty($nombre) || empty($telefono) || empty($email) || empty($contraseña)) {
-                $_SESSION['error'] = "Todos los campos son obligatorios.";
-                header("Location: index.php?controller=registro&action=index");
-                exit;
+                $error = "Todos los campos son obligatorios.";
+                $view = 'src/view/registro.php';
+                require 'src/view/main.php';
+                exit; // Use exit to stop execution, but don't redirect if we want to show error in place.
+                      // Wait, original code set SESSION error and redirected. 
+                      // Redirecting is actually cleaner for PRG pattern. 
+                      // The user asked for View standardization. 
+                      // If I conform to "Controllers define $view and include main", I should render NOT redirect on error?
+                      // Usually Form Error = Re-render with error.
+                      // Original code: $_SESSION['error'] = ... header(Location...).
+                      // Let's stick to consistent pattern: Render with Error variable if possible.
+                      // But the View checks `isset($error)`.
+                      // So render is better.
             }
 
             if ($this->usuarioDAO->emailExiste($email)) {
-                $_SESSION['error'] = "El email ya está registrado.";
-                header("Location: index.php?controller=registro&action=index");
+                $error = "El email ya está registrado.";
+                $view = 'src/view/registro.php';
+                require 'src/view/main.php';
                 exit;
             }
             $hash = password_hash($contraseña, PASSWORD_DEFAULT);
@@ -49,8 +61,9 @@ class registroController {
                 header("Location: index.php?controller=login&action=index");
                 exit;
             } else {
-                $_SESSION['error'] = "Error al crear cuenta.";
-                header("Location: index.php?controller=registro&action=index");
+                $error = "Error al crear cuenta.";
+                $view = 'src/view/registro.php';
+                require 'src/view/main.php';
                 exit;
             }
         }

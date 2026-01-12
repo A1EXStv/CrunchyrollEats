@@ -1,5 +1,5 @@
 <?php
-require_once "src/DAO/usuarioDAO.php";
+require_once "src/DAO/UsuarioDAO.php";
 require_once "src/model/Usuario.php";
 
 class LoginController {
@@ -14,7 +14,8 @@ class LoginController {
     }
 
     public function index() {
-        require 'src/view/login.php';
+        $view = 'src/view/login.php';
+        require 'src/view/main.php';
     }
 
     public function auth() {
@@ -32,15 +33,21 @@ class LoginController {
                     'rol' => $usuario->getRol()
                 ];
 
+                require_once "src/DAO/LogDAO.php";
+                $logDAO = new LogDAO();
+                $logDAO->registrar($usuario->getId_usuario(), "Inicio de sesión exitoso");
+
                 header("Location: index.php?controller=home&action=index");
                 exit;
             } else {
                 $error = "Email o contraseña incorrectos";
-                require 'src/view/login.php';
+                $view = 'src/view/login.php';
+                require 'src/view/main.php';
             }
         } else {
             $error = "Debe completar todos los campos";
-            require 'src/view/login.php';
+            $view = 'src/view/login.php';
+            require 'src/view/main.php';
         }
     }
 
@@ -57,15 +64,20 @@ class LoginController {
                 exit;
             } else {
                 $error = "Error al registrar usuario";
-                require 'src/view/register.php';
+                require 'src/view/registro.php';
             }
         } else {
             $error = "Debe completar todos los campos";
-            require 'src/view/register.php';
+            require 'src/view/registro.php';
         }
     }
 
     public function logout() {
+        if (isset($_SESSION['usuario'])) {
+            require_once "src/DAO/LogDAO.php";
+            $logDAO = new LogDAO();
+            $logDAO->registrar($_SESSION['usuario']['id'], "Cierre de sesión");
+        }
         session_destroy();
         header("Location: index.php?controller=login&action=index");
         exit;

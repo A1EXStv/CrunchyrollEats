@@ -1,62 +1,79 @@
 
+
     <section class="hero-section">
-        <img src="/CrunchyEats_AlexRomeroLozano/public/img/primera_imagen_home.png" alt="Imagen publicidad">
+        <img src="public/img/primera_imagen_home.png" alt="Imagen publicidad">
     </section>
 
     <section class="py-5">
         <div class="container">
             <div class="cabecera-products-section mb4">
                 <h2>Descuentos Navideños</h2>
-                <a href="#" class="vertodo">Ver todo →</a>
+                <a href="index.php?controller=carta&action=index" class="vertodo">Ver todo →</a>
             </div>
             
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <?php
+            <div class="carousel-outer-wrapper">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php
+                        $chunks = array_chunk($productos, 4);
+                        foreach ($chunks as $index => $slide) {
+                            $active = $index === 0 ? 'active' : '';
+                            echo "<div class='carousel-item $active'><div class='row'>";
+                            foreach ($slide as $producto) {
+                                $tieneDescuento = (float)$producto['precio_final'] < (float)$producto['precio'];
+                                $precioOriginal = (float)$producto['precio'];
+                                $precioFinal = (float)$producto['precio_final'];
+                                
+                                $productoParaCarrito = $producto;
+                                $productoParaCarrito['precio_final'] = $precioFinal;
+                                $jsonProducto = htmlspecialchars(json_encode($productoParaCarrito), ENT_QUOTES, 'UTF-8');
+                                ?>
+                                <div class='col-md-3 col-sm-6'>
+                                    <div class='product-card'>
+                                        <a href="index.php?controller=producto&action=ver&id=<?= $producto['id_producto'] ?>">
+                                            <img src='<?= $producto['imagen'] ?>' alt='<?= $producto['nombre'] ?>' class='product-image text-center'>
+                                        </a>
+                                        <div class='product-info'>
+                                            <a href="index.php?controller=producto&action=ver&id=<?= $producto['id_producto'] ?>" class="text-decoration-none text-dark">
+                                                <h5><?= $producto['nombre'] ?></h5>
+                                            </a>
+                                            <div class='product-price'>
+                                                <?php if ($tieneDescuento): ?>
+                                                    <span class="currency-price text-muted text-decoration-line-through" style="font-size: 0.8em;"><?= number_format($precioOriginal, 2) ?> €</span>
+                                                    <span class="currency-price text-danger fw-bold"><?= number_format($precioFinal, 2) ?> €</span>
+                                                <?php else: ?>
+                                                    <span class="currency-price"><?= number_format($precioOriginal, 2) ?> €</span>
+                                                <?php endif; ?>
+                                            </div>
 
-
-$chunks = array_chunk($productos, 4);
-
-foreach ($chunks as $index => $slide) {
-
-    $active = $index === 0 ? 'active' : '';
-
-    echo "<div class='carousel-item $active'><div class='row'>";
-
-    foreach ($slide as $producto) {
-        $accionBoton = isset($_SESSION['usuario'])
-            ? "index.php?controller=carrito&action=agregar&id={$producto['id_producto']}"
-            : "index.php?controller=login&action=index";
-
-        echo "
-        <div class='col-md-3 col-sm-6'>
-            <div class='product-card'>
-                <img src='{$producto['imagen']}' alt='{$producto['nombre']}' class='product-image'>
-                <div class='product-info'>
-                    <h5>{$producto['nombre']}</h5>
-                    <div class='product-price'>\${$producto['precio']}</div>
-
-                    <button class='btn-add-cart' onclick=\"window.location.href='$accionBoton'\">
-                        Añadir al carrito
-                    </button>
-
+                                            <?php 
+                                            $onclickAction = isset($_SESSION['usuario']) 
+                                                ? "addToCart($jsonProducto)" 
+                                                : "window.location.href='index.php?controller=login&action=index'"; 
+                                            ?>
+                                            <button class="btn-add-cart" onclick="<?= $onclickAction ?>">
+                                                Añadir al carrito
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            echo "</div></div>";
+                        }
+                        ?>
+                    </div>
                 </div>
+                <!-- Botones fuera del div del carrusel pero dentro del wrapper -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
-        ";
-    }
-
-    echo "</div></div>";
-}
-?>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
+    </section>
     </section>
 
 
@@ -65,6 +82,7 @@ foreach ($chunks as $index => $slide) {
 
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="anime-card">
+                    <a href='index.php?controller=carta&action=index&serie[]=20' class='text-decoration-none'>
                     <div class="anime-img">
                         <img src="public/img/pokemon_carta.png" alt="Pokemon"></a>
                     </div>
@@ -72,30 +90,35 @@ foreach ($chunks as $index => $slide) {
                         <h4 class="anime-title">Compra Pokémon</h4>
                         <p class="anime-desc">Ash, Pikachu y sus amigos están listos</p>
                     </div>
+                    </a>
                 </div>
             </div>
 
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="anime-card">
+                    <a href='index.php?controller=carta&action=index&serie[]=10' class='text-decoration-none'>
                     <div class="anime-img">
-                    <a href="#"><img src="public/img/evangelion_carta.png" alt="Evangelion"></a>
+                    <img src="public/img/evangelion_carta.png" alt="Evangelion">
                     </div>
                     <div class="anime-body">
                         <h4 class="anime-title">Compra Evangelion</h4>
                         <p class="anime-desc">Asuka y Rei te esperan para cumplir la misión</p>
                     </div>
+                    </a>
                 </div>
             </div>
 
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="anime-card">
+                    <a href='index.php?controller=carta&action=index&serie[]=8' class='text-decoration-none'>
                     <div class="anime-img">
-                        <a href="#"><img src="public/img/digimon_carta.png" alt="YuYu Hakusho"></a>
+                        <img src="public/img/digimon_carta.png" alt="Digimon">
                     </div>
                     <div class="anime-body">
                         <h4 class="anime-title">Compra Digimon</h4>
                         <p class="anime-desc">Agumon y Tai te espera para pelear y salvar a los humanos</p>
                     </div>
+                    </a>
                 </div>
             </div>
 
@@ -107,24 +130,28 @@ foreach ($chunks as $index => $slide) {
         <div class="two-card-row">
             <div class="two-card-col">
                 <div class="two-card">
+                    <a href='index.php?controller=carta&action=index&serie[]=21' class='text-decoration-none'>
                     <div class="two-card-image">
                         <img src="public/img/yuyu_carta_dos.png" alt="Imagen 1">
                     </div>
                     <div class="two-card-content">
-                        <h4 class="two-card-title">Título Tarjeta 1</h4>
-                        <p class="two-card-desc">Descripción de la primera tarjeta, manteniendo el estilo homogéneo.</p>
+                        <h4 class="two-card-title">Novedades</h4>
+                        <p class="two-card-desc">Descubre los nuevos productos.</p>
                     </div>
+                    </a>
                 </div>
             </div>
             <div class="two-card-col">
                 <div class="two-card">
+                    <a href='index.php?controller=carta&action=index&serie[]=3' class='text-decoration-none'>
                     <div class="two-card-image">
                         <img src="public/img/demon_carta_dos.png" alt="Imagen 2">
                     </div>
                     <div class="two-card-content">
-                        <h4 class="two-card-title">Título Tarjeta 2</h4>
-                        <p class="two-card-desc">Descripción de la segunda tarjeta, manteniendo el mismo estilo.</p>
+                        <h4 class="two-card-title">Novedades</h4>
+                        <p class="two-card-desc">Descubre los nuevos productos.</p>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -143,14 +170,15 @@ foreach ($chunks as $index => $slide) {
             foreach ($series as $serie) {
                 echo "
                 <div class='col-md-3 col-sm-6'>
-                    <div class='brand-logo'>
-                        <img src='{$serie['imagen']}' alt='{$serie['nombre']}' class='product-image'>
-                    </div>
+                    <a href='index.php?controller=carta&action=index&serie[]={$serie['id_serie']}' class='text-decoration-none'>
+                        <div class='brand-logo'>
+                            <img src='{$serie['imagen']}' alt='{$serie['nombre']}' class='product-image'>
+                        </div>
+                    </a>
                 </div>
                 ";
             }
-            echo "</div></div>";
-        ?>
+            ?>
         </div>
     </div>
 </section>

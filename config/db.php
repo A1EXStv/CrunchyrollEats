@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once __DIR__ . "/config.php";
 
 class DBConnection {
     public static function connect() {
@@ -10,6 +10,7 @@ class DBConnection {
         }
 
         $connection->set_charset("utf8");
+        $connection->query("SET time_zone = '+01:00'"); // Standardize to match provided time
         return $connection;
     }
 }
